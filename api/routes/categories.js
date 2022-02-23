@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Category = require('../models/Category');
 
+// '/api/categories'
 router.post('/', async (req, res) => {
    const newCat = new Category(req.body);
 
@@ -13,6 +14,7 @@ router.post('/', async (req, res) => {
    }
 });
 
+// '/api/categories'
 router.get('/', async (req, res) => {
    try {
       const cats = await Category.find();
