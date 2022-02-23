@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
    }
 });
 
-//GET ALL POSTS '/api/posts'
+//GET ALL POSTS '/api/posts' ⭐⭐⭐⭐⭐⭐
 router.get('/', async (req, res) => {
    const username = req.query.user;
    const catName = req.query.cat;
@@ -83,12 +83,14 @@ router.get('/', async (req, res) => {
       if (username) {
          posts = await Post.find({ username });
       } else if (catName) {
+         // categories: { $in: [catName] }, q la categoria incluya "catName"
          posts = await Post.find({
             categories: { $in: [catName] },
          });
       } else {
          posts = await Post.find();
       }
+
       res.status(200).json(posts);
    } catch (err) {
       res.status(500).json(err);
