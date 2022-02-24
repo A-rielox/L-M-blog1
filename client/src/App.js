@@ -10,6 +10,13 @@ import { Context } from './context/Context';
 
 import { BrowserRouter, Routes, Route /* Navigate */ } from 'react-router-dom';
 
+/* 
+
+GRAN FAIL Q LOS POST LOS BUSCA POR NOMBRE, ENTONCES DESPUES DE CAMBIAR A MI CUENTA DE NOMBRE NO RECONOCE LOS POST ANTERIORES COMO MIOS
+
+
+*/
+
 function App() {
    const { user } = useContext(Context);
 
