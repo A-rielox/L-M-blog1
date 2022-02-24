@@ -1,7 +1,21 @@
-// import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './sidebar.css';
 
 export default function Sidebar() {
+   const [cats, setCats] = useState([]);
+
+   useEffect(() => {
+      const getCats = async () => {
+         const { data } = await axios.get('/categories');
+
+         setCats(data);
+      };
+
+      getCats();
+   }, []);
+
    return (
       <div className="sidebar">
          <div className="sidebarItem">
@@ -21,36 +35,13 @@ export default function Sidebar() {
          <div className="sidebarItem">
             <span className="sidebarTitle">CATEGORIES</span>
             <ul className="sidebarList">
-               <li className="sidebarListItem">
-                  {/* <Link className="link" to="/posts?cat=Life">
-                  </Link> */}
-                  Life
-               </li>
-               <li className="sidebarListItem">
-                  {/* <Link className="link" to="/posts?cat=Music">
-                  </Link> */}
-                  Music
-               </li>
-               <li className="sidebarListItem">
-                  {/* <Link className="link" to="/posts?cat=Sport">
-                  </Link> */}
-                  Sport
-               </li>
-               <li className="sidebarListItem">
-                  {/* <Link className="link" to="/posts?cat=Style">
-                  </Link> */}
-                  Style
-               </li>
-               <li className="sidebarListItem">
-                  {/* <Link className="link" to="/posts?cat=Tech">
-                  </Link> */}
-                  Tech
-               </li>
-               <li className="sidebarListItem">
-                  {/* <Link className="link" to="/posts?cat=Cinema">
-                  </Link> */}
-                  Cinema
-               </li>
+               {cats.map(c => {
+                  return (
+                     <Link key={c._id} className="link" to={`/?cat=${c.name}`}>
+                        <li className="sidebarListItem">{c.name}</li>
+                     </Link>
+                  );
+               })}
             </ul>
          </div>
 
@@ -68,3 +59,8 @@ export default function Sidebar() {
       </div>
    );
 }
+/* createdAt: "2022-02-23T20:12:49.049Z"
+name: "music"
+updatedAt: "2022-02-23T20:12:49.049Z"
+__v: 0
+_id: "62169541bcf04631484897a4" */

@@ -1,42 +1,47 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './post.css';
 
-export default function Post({ img }) {
+export default function Post({ post }) {
    return (
       <div className="post">
-         <img className="postImg" src={img} alt="" />
+         {post.photo && <img className="postImg" src={post.photo} alt="" />}
 
          <div className="postInfo">
             <div className="postCats">
-               <span className="postCat">
-                  {/* <Link className="link" to="/posts?cat=Music">
-                  </Link> */}
-                  Music
-               </span>
-               <span className="postCat">
-                  {/* <Link className="link" to="/posts?cat=Music">
-                  </Link> */}
-                  Life
-               </span>
+               {post.categories.map(c => {
+                  return (
+                     <span className="postCat">
+                        {/* <Link className="link" to="/posts?cat=Music">
+                     </Link> */}
+                        {c.name}
+                     </span>
+                  );
+               })}
             </div>
 
-            <span className="postTitle">
-               {/* <Link to="/post/abc" className="link">
-               </Link> */}
-               Lorem ipsum dolor sit amet
-            </span>
+            <Link to={`/post/${post._id}`} className="link">
+               <span className="postTitle">{post.title}</span>
+            </Link>
 
             <hr />
 
-            <span className="postDate">1 hour ago</span>
+            <span className="postDate">
+               {new Date(post.createdAt).toDateString()}
+            </span>
          </div>
 
-         <p className="postDesc">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-            officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-            fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-            atque, exercitationem quibusdam, reiciendis odio laboriosam?
-         </p>
+         <p className="postDesc">{post.desc}</p>
       </div>
    );
 }
+
+/* 
+categories: []
+createdAt: "2022-02-23T16:54:22.803Z"
+desc: "primer post primer post primer post primer post"
+title: "primer post pepi"
+updatedAt: "2022-02-23T17:03:10.529Z"
+username: "pepi"
+__v: 0
+_id: "621666be6e0e88ac26bbaf45"
+*/
