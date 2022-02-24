@@ -5,7 +5,7 @@ import './topbar.css';
 
 export default function Topbar() {
    const { user, dispatch } = useContext(Context);
-   // const PF = 'http://localhost:5000/images/';
+   const PF = 'http://localhost:5000/images/';
    console.log(user);
 
    const handleLogout = () => {
@@ -48,7 +48,7 @@ export default function Topbar() {
          <div className="topRight">
             {user ? (
                <Link className="link" to="/settings">
-                  <img className="topImg" src={user.profilePic} alt="" />
+                  <img className="topImg" src={PF + user.profilePic} alt="" />
                </Link>
             ) : (
                <ul className="topList">
