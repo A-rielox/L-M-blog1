@@ -7,7 +7,7 @@ import './login.css';
 export default function Login() {
    const userRef = useRef();
    const passwordRef = useRef();
-   const { dispatch, isFetching, user } = useContext(Context);
+   const { dispatch, isFetching } = useContext(Context);
 
    const handleSubmit = async e => {
       e.preventDefault();
@@ -25,7 +25,6 @@ export default function Login() {
       }
    };
 
-   console.log(user);
    console.log(isFetching);
 
    return (
@@ -49,7 +48,7 @@ export default function Login() {
                ref={passwordRef}
             />
 
-            <button className="loginButton" type="submit">
+            <button className="loginButton" type="submit" disabled={isFetching}>
                Login
             </button>
          </form>
